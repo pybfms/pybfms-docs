@@ -3,7 +3,8 @@ pyboolector
 Sphinx>=2.1
 sphinx-rtd-theme
 cairosvg
-pybfms
+# breathe
+pyucis
 sphinxcontrib-makedomain
 sphinxcontrib-spelling
 pyenchant
