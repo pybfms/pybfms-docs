@@ -12,6 +12,7 @@ jobs:
       uses: shimataro/ssh-key-action@v2
       with:
         key: ${{ secrets.SSH_KEY }}
+        known_hosts: ${{ secrets.KNOWN_HOSTS }}
     - uses: actions/checkout@v1
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
