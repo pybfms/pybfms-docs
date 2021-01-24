@@ -30,6 +30,8 @@ jobs:
     - name: Commit changes
       run: |
         git status
+        git config --global user.email "matt.ballance@gmail.com"
+        git config --global user.name "GitHub Action"
         changes=`git status | egrep -e 'modified|deleted' | wc -l`
         if test $changes -ne 0; then
             echo "Changes"
