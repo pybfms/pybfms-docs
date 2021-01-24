@@ -8,6 +8,10 @@ jobs:
   ci-linux:
     runs-on: ubuntu-latest
     steps:
+    - name: Install SSH key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_KEY }}
     - uses: actions/checkout@v1
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
