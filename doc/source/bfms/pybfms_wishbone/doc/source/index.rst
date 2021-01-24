@@ -2,7 +2,7 @@
 PyBfms Wishbone Library
 #######################
 
-The PyBfms Wishbone library provides Bus Functional Models (BFMs)
+The PyBFMs Wishbone library provides Bus Functional Models (BFMs)
 to allow Python testbench environments to use the Wishbone bus protocol.
 
 *************
