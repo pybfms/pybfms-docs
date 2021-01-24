@@ -24,12 +24,16 @@ jobs:
         python -m ivpm update
     - name: Update
       run: |
+        git clone git@github.com:pybfms/pybfms-docs full-clone
+        cd full-clone
+
         git checkout main
         ivpm update
         find -type f
         make update
     - name: Commit changes
       run: |
+        cd full-clone
         git status
         git config --global user.email "matt.ballance@gmail.com"
         git config --global user.name "GitHub Action"
