@@ -23,11 +23,11 @@ update :
 	rm -rf $(PYBFMS_DOC)/doc/source/bfms
 	rm -rf $(PYBFMS_DOC)/doc/source/pybfms
 	mkdir  $(PYBFMS_DOC)/doc/source/pybfms
-	cp -r $(PACKAGES_DIR)/pybfms/{doc,src} $(PYBFMS_DOC)/doc/source/pybfms
+	cp -r $(PACKAGES_DIR)/pybfms/doc $(PACKAGES_DIR)/pybfms/src $(PYBFMS_DOC)/doc/source/pybfms
 	mkdir -p $(PYBFMS_DOC)/doc/source/bfms
 	for bfm in $(BFMS); do \
 		mkdir $(PYBFMS_DOC)/doc/source/bfms/$$bfm ; \
-		cp -r $(PACKAGES_DIR)/$$bfm/{doc,src} $(PYBFMS_DOC)/doc/source/bfms/$$bfm ; \
+		cp -r $(PACKAGES_DIR)/$$bfm/doc $(PACKAGES_DIR)/$$bfm/src $(PYBFMS_DOC)/doc/source/bfms/$$bfm ; \
 	done
 
 latex latexpdf html :

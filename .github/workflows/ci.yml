@@ -25,6 +25,7 @@ jobs:
     - name: Update
       run: |
         ivpm update
+        find -type f
         make update
     - name: Commit changes
       run: |
