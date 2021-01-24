@@ -1,0 +1,6 @@
+
+
+pybfms@ssh://github.com:pybfms/pybfms.git
+pybfms_wishbone@ssh://github.com:pybfms/pybfms_wishbone.git
+pybfms_riscv_debug@ssh://github.com:pybfms/pybfms_riscv_debug.git
+
