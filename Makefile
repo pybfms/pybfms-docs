@@ -30,6 +30,15 @@ update :
 		cp -r $(PACKAGES_DIR)/$$bfm/doc $(PACKAGES_DIR)/$$bfm/src $(PYBFMS_DOC)/doc/source/bfms/$$bfm ; \
 	done
 
+push :
+	deleted=`git status | grep deleted | sed -e 's/deleted://g' | wc -l`; \
+        if test $$deleted -ne 0; then \
+	    git rm `git status | grep deleted | sed -e 's/deleted://g'`; \
+	fi
+	git add doc
+	git commit -m "Update @ `date +%Y%m%d_%H%M`"
+	git push
+
 latex latexpdf html :
 	rm -rf $(PYBFMS_DOC)/build
 	mkdir -p $(PYBFMS_DOC)/build
