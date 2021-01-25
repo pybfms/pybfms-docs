@@ -36,8 +36,15 @@ push :
 	    git rm `git status | grep deleted | sed -e 's/deleted://g'`; \
 	fi
 	git add doc
-	git commit -m "Update @ `date +%Y%m%d_%H%M`"
-	git push
+	git status
+	no_changes=`git status | grep 'no changes added' | wc -l`; \
+	if test $$no_changes -eq 0; then \
+		echo "Changes detected"; \
+        	git commit -m "Update @ `date +%Y%m%d_%H%M`"; \
+		git push; \
+	else \
+		echo "No changes committed"; \
+	fi
 
 latex latexpdf html :
 	rm -rf $(PYBFMS_DOC)/build
