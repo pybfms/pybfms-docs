@@ -1,12 +1,14 @@
 
+from enum import Enum, auto
 import os
-from pybfms.decorators import *
-from pybfms.types import *
 import os
 import sys
+from typing import List
 
-from enum import Enum, auto
 from pybfms.backend import BackendCocotb
+from pybfms.decorators import *
+from pybfms.types import *
+from typing import List
 
 _backend = None
 
@@ -39,6 +41,12 @@ async def init(backend=None, force=False):
     
 def find_bfm(pattern, type=None):
     return BfmMgr.find_bfm(pattern, type)
+
+def get_bfms() -> List:
+    return BfmMgr.get_bfms()
+
+def find_bfms(pattern, type=None) -> List:
+    return BfmMgr.find_bfms(pattern, type)
 
 def event():
     """
