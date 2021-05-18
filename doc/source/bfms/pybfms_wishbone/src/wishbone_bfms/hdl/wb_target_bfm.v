@@ -21,8 +21,10 @@ module wb_target_bfm #(
 		);
 	reg[DATA_WIDTH-1:0]		dat_v = 0;
 	reg						err_v = 0;
+	reg[1:0]				req_v = 0;
 	reg						ack_v = 0;
-	
+
+	reg						have_reset = 0;
 	reg						in_reset = 0;
 	
 	always @(posedge clock) begin
@@ -33,26 +35,35 @@ module wb_target_bfm #(
 			err_v = 0;
 			ack <= 0;
 			ack_v = 0;
+			req_v = 0;
 			in_reset <= 1;
+			have_reset <= 0;
 		end else begin
 			if (in_reset) begin
 				_reset();
 				in_reset <= 0;
+				have_reset <= 1;
 			end
 			dat_r <= dat_v;
 			err <= err_v;
-			ack <= ack_v;
-			
-			if (cyc && stb) begin
-				if (ack) begin
-					// End of access
-					ack_v = 0;
-					err_v = 0;
-					err <= 0;
-					ack <= 0;
-				end else begin
-					// Beginning of access
-					_access_req(adr, we, sel, dat_w);
+
+			if (have_reset) begin
+				if (cyc && stb) begin
+					if (req_v == 0 && ack == 0) begin
+						// New request
+						req_v = req_v + 1;
+						_access_req(adr, we, sel, dat_w);
+					end 
+
+					if (ack_v) begin
+						// We've received an ack, so respond
+						// TODO: should likely support waitstates
+						ack <= 1'b1;
+						ack_v = 0;
+						req_v = req_v - 1;
+					end else begin
+						ack <= 1'b0;
+					end
 				end
 			end
 		end
